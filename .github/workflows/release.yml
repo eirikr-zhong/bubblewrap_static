@@ -20,7 +20,9 @@ jobs:
           build-base \
           meson \
           pkgconfig \
+          libcap-dev \
           libcap-static \
+          libselinux-dev \
           libselinux-static \
           git \
           bash-completion \
