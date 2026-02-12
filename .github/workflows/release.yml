@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-static:
+    name: Build static binary
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v4
+    - name: Install build-dependencies
+      run: |
+        apk add --no-cache \
+          build-base \
+          meson \
+          cmake \
+          pkgconfig \
+          libcap-dev \
+          libcap-static \
+          libselinux-dev \
+          libselinux-static \
+          pcre2-static \
+          git \
+          bash-completion \
+          zsh
+    - name: Setup build
+      run: meson setup _build -Dstatic=true -Dman=disabled
+    - name: Compile
+      run: ninja -C _build -v
+    - name: Rename binary
+      run: mv _build/bwrap _build/bwrap_x86_64
+    - name: Upload binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: bwrap_x86_64
+        path: _build/bwrap_x86_64
+    - name: Upload to Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: _build/bwrap_x86_64

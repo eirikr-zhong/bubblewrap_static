@@ -1,6 +1,10 @@
 Bubblewrap
 ==========
 
+> [!NOTE]
+> This is a fork that builds statically linked bwrap binaries using GitHub Actions.
+> Download pre-built binaries from the [Releases](https://github.com/eirikr-zhong/bubblewrap_static/releases) page.
+
 Many container runtime tools like `systemd-nspawn`, `docker`,
 etc. focus on providing infrastructure for system administrators and
 orchestration tools (e.g. Kubernetes) to run containers.

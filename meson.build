@@ -65,13 +65,15 @@ else
   python = find_program(get_option('python'))
 endif
 
-libcap_dep = dependency('libcap', required : true)
+static_build = get_option('static')
+
+libcap_dep = dependency('libcap', required : true, static : static_build)
 
 selinux_dep = dependency(
   'libselinux',
   version : '>=2.1.9',
-  # if disabled, Meson will behave as though libselinux was not found
   required : get_option('selinux'),
+  static : static_build,
 )
 
 cdata = configuration_data()
@@ -108,6 +110,12 @@ else
   bwrapdir = get_option('bindir')
 endif
 
+if static_build
+  bwrap_link_args = ['-static']
+else
+  bwrap_link_args = []
+endif
+
 bwrap = executable(
   get_option('program_prefix') + 'bwrap',
   [
@@ -121,6 +129,7 @@ bwrap = executable(
   install_dir : bwrapdir,
   install_rpath : get_option('install_rpath'),
   dependencies : [selinux_dep, libcap_dep],
+  link_args : bwrap_link_args,
 )
 
 manpages_xsl = 'http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl'
