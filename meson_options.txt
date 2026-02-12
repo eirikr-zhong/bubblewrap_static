@@ -54,6 +54,12 @@ option(
   value : 'auto',
 )
 option(
+  'static',
+  type : 'boolean',
+  description : 'build static',
+  value : true,
+)
+option(
   'tests',
   type : 'boolean',
   description : 'build tests',

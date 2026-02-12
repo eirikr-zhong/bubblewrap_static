@@ -108,6 +108,12 @@ else
   bwrapdir = get_option('bindir')
 endif
 
+if get_option('static')
+  bwrap_link_args = ['-static']
+else
+  bwrap_link_args = []
+endif
+
 bwrap = executable(
   get_option('program_prefix') + 'bwrap',
   [
@@ -121,6 +127,7 @@ bwrap = executable(
   install_dir : bwrapdir,
   install_rpath : get_option('install_rpath'),
   dependencies : [selinux_dep, libcap_dep],
+  link_args : bwrap_link_args,
 )
 
 manpages_xsl = 'http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl'
