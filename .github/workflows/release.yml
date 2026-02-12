@@ -19,11 +19,13 @@ jobs:
         apk add --no-cache \
           build-base \
           meson \
+          cmake \
           pkgconfig \
           libcap-dev \
           libcap-static \
           libselinux-dev \
           libselinux-static \
+          pcre2-static \
           git \
           bash-completion \
           zsh
