@@ -20,8 +20,8 @@ jobs:
           build-base \
           meson \
           pkgconfig \
-          libcap-dev \
-          libselinux-dev \
+          libcap-static \
+          libselinux-static \
           git \
           bash-completion \
           zsh
