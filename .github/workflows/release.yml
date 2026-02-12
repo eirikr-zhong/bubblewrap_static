@@ -24,7 +24,7 @@ jobs:
           libselinux-dev \
           git
     - name: Setup build
-      run: meson setup _build -Dstatic=true
+      run: meson setup _build -Dstatic=true -Dbash_completion=disabled -Dzsh_completion=disabled -Dman=disabled
     - name: Compile
       run: ninja -C _build -v
     - name: Upload binary
