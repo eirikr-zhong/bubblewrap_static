@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - dev-statis
+      - dev-static
 
 jobs:
   build-static:
