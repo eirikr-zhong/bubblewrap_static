@@ -22,9 +22,11 @@ jobs:
           pkgconfig \
           libcap-dev \
           libselinux-dev \
-          git
+          git \
+          bash-completion \
+          zsh
     - name: Setup build
-      run: meson setup _build -Dstatic=true -Dbash_completion=disabled -Dzsh_completion=disabled -Dman=disabled
+      run: meson setup _build -Dstatic=true -Dman=disabled
     - name: Compile
       run: ninja -C _build -v
     - name: Upload binary
